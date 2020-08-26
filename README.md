@@ -1,2 +1,3 @@
 # modules-study
-Estudo sobre módulos com Javascript
+
+Estudo sobre módulos com Javascript.
