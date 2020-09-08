@@ -73,33 +73,37 @@ function cashRegister(initialCoins) {
     }
   }
 
-  return {
-    receiveDeposit: (coins) => {
-      cash.forEach((quantity, index) => {
-        cash[index] = quantity + coins[index];
-      });
+  function receiveDeposit(coins) {
+    cash.forEach((quantity, index) => {
+      cash[index] = quantity + coins[index];
+    });
 
-      return calculateValue(cash);
-    },
-    performPurchase: (deposit, price) => {
-      price = price.toFixed(2);
-      const depositValue = calculateValue(deposit).toFixed(2);
+    return calculateValue(cash);
+  }
 
-      if (depositValue < price) {
-        return generateResponse("not_enough", deposit);
-      } else if (depositValue === price) {
-        return generateResponse("success_no_change", null);
+  function performPurchase(deposit, price) {
+    price = price.toFixed(2);
+    const depositValue = calculateValue(deposit).toFixed(2);
+
+    if (depositValue < price) {
+      return generateResponse("not_enough", deposit);
+    } else if (depositValue === price) {
+      return generateResponse("success_no_change", null);
+    } else {
+      let { changeValue, change } = calculateChange(depositValue, price);
+
+      if (changeValue > 0) {
+        return generateResponse("no_change_enough", deposit);
       } else {
-        let { changeValue, change } = calculateChange(depositValue, price);
-
-        if (changeValue > 0) {
-          return generateResponse("no_change_enough", deposit);
-        } else {
-          subtractFromCash(change);
-          return generateResponse("success", change);
-        }
+        subtractFromCash(change);
+        return generateResponse("success", change);
       }
-    },
+    }
+  }
+
+  return {
+    receiveDeposit,
+    performPurchase,
   };
 }
 

@@ -74,11 +74,11 @@ function storage(initialProducts, initialQuantities) {
   }
 
   return {
-    showProducts: showProducts,
-    getTotalPrice: getTotalPrice,
-    isAvailable: isAvailable,
-    incrementBy: incrementBy,
-    decrementBy: decrementBy,
+    showProducts,
+    getTotalPrice,
+    isAvailable,
+    incrementBy,
+    decrementBy,
   };
 }
 
