@@ -1,9 +1,13 @@
+/**
+ * usar dicionário para identificar o
+ * evento sendo transmitido e o array
+ * de observers correspondentes
+ */
+
 function vendingMachine() {
   let state = {
     observers: [],
   };
-
-  document.addEventListener("start", handleStart);
 
   function registerObserver(observerFunction) {
     state.observers.push(observerFunction);

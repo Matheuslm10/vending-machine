@@ -1,4 +1,4 @@
-function cashRegister(initialCoins) {
+function cashRegister(initialCoins, vendingMachineObserver) {
   let cash = initialCoins;
   const currenciesIndexes = [1, 0.5, 0.25, 0.1, 0.05, 0.01];
 
@@ -78,6 +78,8 @@ function cashRegister(initialCoins) {
       cash[index] = quantity + coins[index];
     });
 
+    vendingMachine.notifyAll("cashReady", cash);
+
     return calculateValue(cash);
   }
 
@@ -101,6 +103,8 @@ function cashRegister(initialCoins) {
     }
   }
 
+  vendingMachineObserver.registerObserver("deposit", receiveDeposit);
+
   return {
     receiveDeposit,
     performPurchase,
@@ -108,3 +112,6 @@ function cashRegister(initialCoins) {
 }
 
 export default cashRegister;
+
+// main.js
+vendingMachineObserver.notifyAll("deposit", [2, 3, 5, 6, 7, 1]);
