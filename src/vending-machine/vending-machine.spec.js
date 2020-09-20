@@ -1,4 +1,4 @@
-import vending_machine from "./vending-machine";
+import vending_machine from "./vending-machine.mjs";
 
 describe("Vending Machine", () => {
   let vending_machine_test;

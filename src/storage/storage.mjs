@@ -2,6 +2,16 @@ function storage(initialProducts, initialQuantities) {
   let allProducts = initialProducts;
   let quantities = initialQuantities;
 
+  function update(event, payload) {
+    if (event === "start") {
+      return showProducts();
+    }
+
+    if (event === "choice") {
+      return getTotalPrice(payload);
+    }
+  }
+
   function showProducts(filters) {
     if (filters && filters.price) {
       let price = filters.price;
@@ -26,6 +36,8 @@ function storage(initialProducts, initialQuantities) {
   function getTotalPrice(order) {
     let totalPrice = 0.0;
     let product = {};
+
+    // TODO - verificar se tem disponível.
     order.forEach((item) => {
       product = allProducts.find((product) => product.id === item.productId);
       totalPrice = totalPrice + product.price * item.quantity;
@@ -74,6 +86,7 @@ function storage(initialProducts, initialQuantities) {
   }
 
   return {
+    update,
     showProducts,
     getTotalPrice,
     isAvailable,

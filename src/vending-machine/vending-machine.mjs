@@ -13,18 +13,15 @@ function vendingMachine() {
     state.observers.push(observerFunction);
   }
 
-  function notifyObservers() {
-    for (const observerFunction of state.observers) {
-      observerFunction();
+  function notifyObservers(event, payload) {
+    for (const observer of state.observers) {
+      console.log(observer.update(event, payload));
     }
-  }
-
-  function handleStart() {
-    notifyObservers();
   }
 
   return {
     registerObserver,
+    notifyObservers,
   };
 }
 

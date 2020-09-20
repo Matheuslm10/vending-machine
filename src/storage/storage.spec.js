@@ -1,8 +1,8 @@
-import storage from "./storage";
+import storage from "./storage.mjs";
 import {
   products_fixture,
   quantities_fixture,
-} from "../fixtures/storage-initial-state-fixture";
+} from "../fixtures/storage-initial-state-fixture.mjs";
 
 describe("Storage", () => {
   let storage_test;

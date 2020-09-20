@@ -1,4 +1,4 @@
-import cashRegister from "./cash-register";
+import cashRegister from "./cash-register.mjs";
 
 describe("cash-register", () => {
   let cash_register;

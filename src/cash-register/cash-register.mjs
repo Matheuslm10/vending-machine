@@ -2,6 +2,15 @@ function cashRegister(initialCoins, vendingMachineObserver) {
   let cash = initialCoins;
   const currenciesIndexes = [1, 0.5, 0.25, 0.1, 0.05, 0.01];
 
+  function update(event, payload) {
+    if (event === "perform_purchase") {
+      return performPurchase(payload.deposit, payload.price);
+    }
+    if (event === "deposit") {
+      return receiveDeposit(payload);
+    }
+  }
+
   function calculateValue(coins) {
     let counter = 0;
     currenciesIndexes.forEach((currency, index) => {
@@ -48,6 +57,7 @@ function cashRegister(initialCoins, vendingMachineObserver) {
           change: coins,
         };
       case "success_no_change":
+        console.log("valor do caixa depois da compra: ", calculateValue(cash));
         return {
           success: true,
           message: "Purchase successful!",
@@ -60,6 +70,7 @@ function cashRegister(initialCoins, vendingMachineObserver) {
           change: coins,
         };
       case "success":
+        console.log("valor do caixa depois da compra: ", calculateValue(cash));
         return {
           success: true,
           message: "Purchase successful!",
@@ -78,8 +89,6 @@ function cashRegister(initialCoins, vendingMachineObserver) {
       cash[index] = quantity + coins[index];
     });
 
-    vendingMachine.notifyAll("cashReady", cash);
-
     return calculateValue(cash);
   }
 
@@ -90,6 +99,7 @@ function cashRegister(initialCoins, vendingMachineObserver) {
     if (depositValue < price) {
       return generateResponse("not_enough", deposit);
     } else if (depositValue === price) {
+      receiveDeposit(deposit);
       return generateResponse("success_no_change", null);
     } else {
       let { changeValue, change } = calculateChange(depositValue, price);
@@ -97,21 +107,18 @@ function cashRegister(initialCoins, vendingMachineObserver) {
       if (changeValue > 0) {
         return generateResponse("no_change_enough", deposit);
       } else {
+        receiveDeposit(deposit);
         subtractFromCash(change);
         return generateResponse("success", change);
       }
     }
   }
 
-  vendingMachineObserver.registerObserver("deposit", receiveDeposit);
-
   return {
+    update,
     receiveDeposit,
     performPurchase,
   };
 }
 
 export default cashRegister;
-
-// main.js
-vendingMachineObserver.notifyAll("deposit", [2, 3, 5, 6, 7, 1]);
