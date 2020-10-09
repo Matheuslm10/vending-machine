@@ -1,0 +1,9 @@
+.showcase {
+  border: 2px solid black;
+  padding-left: 25px;
+  height: 60%;
+}
+
+.item {
+  padding-top: 10px;
+}
