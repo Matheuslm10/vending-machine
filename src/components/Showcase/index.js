@@ -9,8 +9,10 @@ function Showcase({ products = [] }) {
         {products.length > 0 ? (
           products.map((product) => (
             <li key={product.id} className="item">
-              <p>{product.name}</p>
-              <p>{product.price}</p>
+              <p>
+                {product.id} - {product.name}
+              </p>
+              <p>Preço: R$ {product.price}</p>
             </li>
           ))
         ) : (
