@@ -1,6 +1,6 @@
 function vendingMachine() {
   let state = {
-    observers: [],
+    observers: []
   };
 
   function registerObserver(observer) {
@@ -21,7 +21,7 @@ function vendingMachine() {
 
   return {
     registerObserver,
-    notifyObservers,
+    notifyObservers
   };
 }
 

@@ -1,19 +1,19 @@
-import React, { useEffect, useState } from "react";
-import "./App.css";
+import React, { useEffect, useState } from 'react';
+import './App.css';
 
-import Showcase from "./components/Showcase";
-import PickupSlot from "./components/PickupSlot";
-import Selector from "./components/Selector";
-import CoinIn from "./components/CoinIn";
-import CoinOut from "./components/CoinOut";
+import Showcase from './components/Showcase';
+import PickupSlot from './components/PickupSlot';
+import Selector from './components/Selector';
+import CoinIn from './components/CoinIn';
+import CoinOut from './components/CoinOut';
 
-import cashRegister from "./modules/cash-register/cash-register";
-import storage from "./modules/storage/storage";
-import vendingMachine from "./modules/vending-machine/vending-machine";
+import cashRegister from './modules/cash-register/cash-register';
+import storage from './modules/storage/storage';
+import vendingMachine from './modules/vending-machine/vending-machine';
 import {
   products_fixture,
-  quantities_fixture,
-} from "./fixtures/storage-initial-state-fixture.js";
+  quantities_fixture
+} from './fixtures/storage-initial-state-fixture.js';
 
 function App() {
   const [initialProducts, setInitialProducts] = useState([]);
@@ -31,14 +31,14 @@ function App() {
     vendingMachineInstance.registerObserver(cashRegisterInstance);
     vendingMachineInstance.registerObserver(storageInstance);
 
-    const returnedValues = vendingMachineInstance.notifyObservers("start");
+    const returnedValues = vendingMachineInstance.notifyObservers('start');
     const products = returnedValues[0];
     setInitialProducts(products);
   }
 
   function calculatePrice({ productId, quantity }) {
-    const returnedValues = vendingMachineInstance.notifyObservers("choice", [
-      { productId: Number(productId), quantity: Number(quantity) },
+    const returnedValues = vendingMachineInstance.notifyObservers('choice', [
+      { productId: Number(productId), quantity: Number(quantity) }
     ]);
     setTotalPrice(returnedValues[0]);
   }

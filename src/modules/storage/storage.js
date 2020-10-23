@@ -3,11 +3,11 @@ function storage(initialProducts, initialQuantities) {
   let quantities = initialQuantities;
 
   function update(event, payload) {
-    if (event === "start") {
+    if (event === 'start') {
       return showProducts();
     }
 
-    if (event === "choice") {
+    if (event === 'choice') {
       return getTotalPrice(payload);
     }
   }
@@ -18,7 +18,7 @@ function storage(initialProducts, initialQuantities) {
 
       if (price.max && price.min) {
         if (price.min > price.max) {
-          throw Error("Invalid price range.");
+          throw Error('Invalid price range.');
         }
 
         return allProducts.filter(
@@ -52,7 +52,7 @@ function storage(initialProducts, initialQuantities) {
       (product) => product.productId === productId
     );
 
-    if (!product) throw Error("The product is not registered.");
+    if (!product) throw Error('The product is not registered.');
 
     return product.quantity >= quantity;
   }
@@ -62,7 +62,7 @@ function storage(initialProducts, initialQuantities) {
       (product) => product.productId === productId
     );
 
-    if (productIndex === -1) throw Error("The product is not registered.");
+    if (productIndex === -1) throw Error('The product is not registered.');
 
     const currentQuantity = quantities[productIndex].quantity;
 
@@ -76,7 +76,7 @@ function storage(initialProducts, initialQuantities) {
       (product) => product.productId === productId
     );
 
-    if (productIndex === -1) throw Error("The product is not registered.");
+    if (productIndex === -1) throw Error('The product is not registered.');
 
     const currentQuantity = quantities[productIndex].quantity;
 
@@ -91,7 +91,7 @@ function storage(initialProducts, initialQuantities) {
     getTotalPrice,
     isAvailable,
     incrementBy,
-    decrementBy,
+    decrementBy
   };
 }
 
