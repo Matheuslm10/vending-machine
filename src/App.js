@@ -14,6 +14,11 @@ import {
   products_fixture,
   quantities_fixture
 } from './fixtures/storage-initial-state-fixture.js';
+import {
+  StorageContext,
+  StorageContextProvider
+} from './contexts/storageContext';
+import { CoreContextProvider } from './contexts/coreContext';
 
 function App() {
   const [initialProducts, setInitialProducts] = useState([]);
@@ -45,15 +50,19 @@ function App() {
 
   return (
     <>
-      <div className="left-side">
-        <Showcase products={initialProducts} />
-        <PickupSlot></PickupSlot>
-      </div>
-      <div className="right-side">
-        <Selector handleBuy={calculatePrice}></Selector>
-        <CoinIn totalPrice={totalPrice}></CoinIn>
-        <CoinOut></CoinOut>
-      </div>
+      <CoreContextProvider>
+        <StorageContextProvider>
+          <div className="left-side">
+            <Showcase products={initialProducts} />
+            <PickupSlot></PickupSlot>
+          </div>
+          <div className="right-side">
+            <Selector handleBuy={calculatePrice}></Selector>
+            <CoinIn totalPrice={totalPrice}></CoinIn>
+            <CoinOut></CoinOut>
+          </div>
+        </StorageContextProvider>
+      </CoreContextProvider>
     </>
   );
 }

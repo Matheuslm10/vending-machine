@@ -1,12 +1,18 @@
-import React, { useState, createContext } from 'react';
+import React, { useState, createContext, useEffect, useContext } from 'react';
+import { CoreContext } from './coreContext';
+import {
+  products_fixture,
+  quantities_fixture
+} from '../fixtures/storage-initial-state-fixture.js';
 
 export const StorageContext = createContext();
 
 export const StorageContextProvider = (props) => {
-  const [allProducts, setAllProducts] = useState([]);
-  const [quantities, setQuantities] = useState([]);
+  const [allProducts, setAllProducts] = useState(products_fixture);
+  const [quantities, setQuantities] = useState(quantities_fixture);
+  const { stage } = useContext(CoreContext);
 
-  function showProducts(filters) {
+  function getProducts(filters) {
     if (filters && filters.price) {
       let price = filters.price;
 
@@ -86,7 +92,7 @@ export const StorageContextProvider = (props) => {
         setAllProducts,
         quantities,
         setQuantities,
-        showProducts,
+        getProducts,
         getTotalPrice,
         isAvailable,
         incrementBy,
