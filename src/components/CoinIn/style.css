@@ -3,3 +3,18 @@
   margin-top: 25px;
   height: 20%;
 }
+
+.coins-input-group {
+  display: flex;
+  flex-flow: row wrap;
+}
+
+.coin-input {
+  flex: 1;
+  text-align: center;
+  margin: 5px 10px 10px;
+}
+
+.coin-input > input {
+  max-width: 50px;
+}
