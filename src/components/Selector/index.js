@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState, useRef } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { CashRegisterContext } from '../../contexts/cashRegisterContext';
 import { StorageContext } from '../../contexts/storageContext';
 
@@ -6,34 +6,36 @@ import './style.css';
 
 function Selector() {
   const { performPurchase } = useContext(CashRegisterContext);
-  const storageContextRef = useRef(useContext(StorageContext));
-  const [productId, setProductId] = useState(1);
+  const { getTotalPrice } = useContext(StorageContext);
+  const [productId, setProductId] = useState('');
   const [quantity, setQuantity] = useState(1);
   const [totalPrice, setTotalPrice] = useState(0);
 
   function handleProductIdChange(event) {
     const value = event.target.value;
-    setProductId(value);
-    // transformar em number aqui
+    setProductId(Number(value));
   }
 
   function handleQuantityChange(event) {
     const value = event.target.value;
-    setQuantity(value);
+    setQuantity(Number(value));
   }
 
   useEffect(() => {
-    if (productId > 0) {
-      console.log('entrou no if do useEffect com product igual a ', productId);
-      setTotalPrice(
-        storageContextRef.current.getTotalPrice([{ productId, quantity }])
-      );
+    if (productId) {
+      setTotalPrice(getTotalPrice([{ productId, quantity }]));
     }
-  }, [productId, quantity]);
+  }, [productId, quantity, getTotalPrice]);
+
+  function handleSubmit(e) {
+    e.preventDefault();
+    let result = performPurchase(totalPrice);
+    console.log(result);
+  }
 
   return (
-    <form onSubmit={() => performPurchase(totalPrice)} className="selector">
-      <p>Digite o id do produto:</p>
+    <form onSubmit={handleSubmit} className="selector">
+      <label>Digite o id do produto:</label>
       <input
         onChange={(e) => handleProductIdChange(e)}
         type="number"
@@ -41,7 +43,7 @@ function Selector() {
         min="0"
       />
 
-      <p>Digite a quantidade desejada:</p>
+      <label>Digite a quantidade desejada:</label>
       <input
         onChange={(e) => handleQuantityChange(e)}
         type="number"

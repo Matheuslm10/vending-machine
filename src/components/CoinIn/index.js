@@ -9,17 +9,19 @@ function CoinIn() {
   );
   const [coins, setCoins] = useState([0, 0, 0, 0, 0, 0]);
 
-  function handleQuantityOfCurrancyChange(event, currencyIndex) {
-    const value = event.target.value;
-    setCoins((prev) =>
-      prev.map((currency, index) => {
-        if (index === currencyIndex) {
-          return value;
-        } else {
-          return currency;
-        }
-      })
-    );
+  function handleQuantityOfCurrancyChange(currencyIndex) {
+    return (event) => {
+      const value = event.target.value;
+      setCoins((prev) =>
+        prev.map((currency, index) => {
+          if (index === currencyIndex) {
+            return value;
+          } else {
+            return currency;
+          }
+        })
+      );
+    };
   }
 
   function handleInsertCoins() {
@@ -35,7 +37,7 @@ function CoinIn() {
           <p>R$ 1,00</p>
           <input
             value={coins[0]}
-            onChange={(e) => handleQuantityOfCurrancyChange(e, 0)}
+            onChange={handleQuantityOfCurrancyChange(0)}
             type="number"
             min="0"
           />
@@ -45,7 +47,7 @@ function CoinIn() {
           <p>R$ 0,50</p>
           <input
             value={coins[1]}
-            onChange={(e) => handleQuantityOfCurrancyChange(e, 1)}
+            onChange={handleQuantityOfCurrancyChange(1)}
             type="number"
             min="0"
           />
@@ -55,7 +57,7 @@ function CoinIn() {
           <p>R$ 0,25</p>
           <input
             value={coins[2]}
-            onChange={(e) => handleQuantityOfCurrancyChange(e, 2)}
+            onChange={handleQuantityOfCurrancyChange(2)}
             type="number"
             min="0"
           />
@@ -65,7 +67,7 @@ function CoinIn() {
           <p>R$ 0,10</p>
           <input
             value={coins[3]}
-            onChange={(e) => handleQuantityOfCurrancyChange(e, 3)}
+            onChange={handleQuantityOfCurrancyChange(3)}
             type="number"
             min="0"
           />
@@ -75,7 +77,7 @@ function CoinIn() {
           <p>R$ 0,05</p>
           <input
             value={coins[4]}
-            onChange={(e) => handleQuantityOfCurrancyChange(e, 4)}
+            onChange={handleQuantityOfCurrancyChange(4)}
             type="number"
             min="0"
           />
@@ -85,7 +87,7 @@ function CoinIn() {
           <p>R$ 0,01</p>
           <input
             value={coins[5]}
-            onChange={(e) => handleQuantityOfCurrancyChange(e, 5)}
+            onChange={handleQuantityOfCurrancyChange(5)}
             type="number"
             min="0"
           />
@@ -95,7 +97,7 @@ function CoinIn() {
       <button
         className="insert-button"
         type="button"
-        onClick={() => handleInsertCoins()}
+        onClick={handleInsertCoins}
       >
         Inserir Moedas
       </button>
