@@ -1,29 +1,57 @@
-import React, { useState } from 'react';
+import React, { useContext, useEffect, useState, useRef } from 'react';
+import { CashRegisterContext } from '../../contexts/cashRegisterContext';
+import { StorageContext } from '../../contexts/storageContext';
 
 import './style.css';
 
-function Selector({ handleBuy }) {
-  const [productId, setProductId] = useState();
-  const [quantity, setQuantity] = useState();
+function Selector() {
+  const { performPurchase } = useContext(CashRegisterContext);
+  const storageContextRef = useRef(useContext(StorageContext));
+  const [productId, setProductId] = useState(1);
+  const [quantity, setQuantity] = useState(1);
+  const [totalPrice, setTotalPrice] = useState(0);
 
   function handleProductIdChange(event) {
-    setProductId(event.target.value);
+    const value = event.target.value;
+    setProductId(value);
     // transformar em number aqui
   }
 
   function handleQuantityChange(event) {
-    setQuantity(event.target.value);
+    const value = event.target.value;
+    setQuantity(value);
   }
 
+  useEffect(() => {
+    if (productId > 0) {
+      console.log('entrou no if do useEffect com product igual a ', productId);
+      setTotalPrice(
+        storageContextRef.current.getTotalPrice([{ productId, quantity }])
+      );
+    }
+  }, [productId, quantity]);
+
   return (
-    <form onSubmit={handleBuy} className="selector">
+    <form onSubmit={() => performPurchase(totalPrice)} className="selector">
       <p>Digite o id do produto:</p>
-      <input onChange={(e) => handleProductIdChange(e)} type="number" />
+      <input
+        onChange={(e) => handleProductIdChange(e)}
+        type="number"
+        value={productId}
+        min="0"
+      />
+
       <p>Digite a quantidade desejada:</p>
-      <input onChange={(e) => handleQuantityChange(e)} type="number" />
-      <button type="button" onClick={() => handleBuy({ productId, quantity })}>
-        Comprar
-      </button>
+      <input
+        onChange={(e) => handleQuantityChange(e)}
+        type="number"
+        value={quantity}
+        min="0"
+      />
+
+      <p>Total da compra: R$ {totalPrice.toFixed(2)}</p>
+
+      <button type="submit">Comprar</button>
     </form>
   );
 }

@@ -1,7 +1,7 @@
 .coin-in {
   border: 2px solid black;
   margin-top: 25px;
-  height: 20%;
+  height: 25%;
 }
 
 .coins-input-group {
@@ -17,4 +17,12 @@
 
 .coin-input > input {
   max-width: 50px;
+}
+
+.insert-button {
+  margin: 10px;
+}
+
+.total-inserted {
+  margin: 10px;
 }

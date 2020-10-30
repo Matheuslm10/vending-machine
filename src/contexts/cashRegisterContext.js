@@ -4,6 +4,7 @@ export const CashRegisterContext = createContext();
 
 export const CashRegisterContextProvider = (props) => {
   const [cash, setCash] = useState([]);
+  const [insertedCoins, setInsertedCoins] = useState([0, 0, 0, 0, 0, 0]);
   const currenciesIndexes = [1, 0.5, 0.25, 0.1, 0.05, 0.01];
 
   function calculateValue(coins) {
@@ -83,7 +84,7 @@ export const CashRegisterContextProvider = (props) => {
   function receiveDeposit(coins) {
     let newCash = [];
     cash.forEach((quantity, index) => {
-      newCash.push(quantity + coins[index])
+      newCash.push(quantity + coins[index]);
     });
     setCash(newCash);
 
@@ -91,22 +92,22 @@ export const CashRegisterContextProvider = (props) => {
     return calculateValue(cash);
   }
 
-  function performPurchase(deposit, price) {
+  function performPurchase(price) {
     price = price.toFixed(2);
-    const depositValue = calculateValue(deposit).toFixed(2);
+    const depositValue = calculateValue(insertedCoins).toFixed(2);
 
     if (depositValue < price) {
-      return generateResponse('not_enough', deposit);
+      return generateResponse('not_enough', insertedCoins);
     } else if (depositValue === price) {
-      receiveDeposit(deposit);
+      receiveDeposit(insertedCoins);
       return generateResponse('success_no_change', null);
     } else {
       let { changeValue, change } = calculateChange(depositValue, price);
 
       if (changeValue > 0) {
-        return generateResponse('no_change_enough', deposit);
+        return generateResponse('no_change_enough', insertedCoins);
       } else {
-        receiveDeposit(deposit);
+        receiveDeposit(insertedCoins);
         subtractFromCash(change);
         return generateResponse('success', change);
       }
@@ -116,6 +117,8 @@ export const CashRegisterContextProvider = (props) => {
   return (
     <CashRegisterContext.Provider
       value={{
+        insertedCoins,
+        setInsertedCoins,
         calculateValue,
         calculateChange,
         subtractFromCash,

@@ -1,5 +1,4 @@
-import React, { useState, createContext, useEffect, useContext } from 'react';
-import { CoreContext } from './coreContext';
+import React, { useState, createContext } from 'react';
 import {
   products_fixture,
   quantities_fixture
@@ -10,7 +9,6 @@ export const StorageContext = createContext();
 export const StorageContextProvider = (props) => {
   const [allProducts, setAllProducts] = useState(products_fixture);
   const [quantities, setQuantities] = useState(quantities_fixture);
-  const { stage } = useContext(CoreContext);
 
   function getProducts(filters) {
     if (filters && filters.price) {
@@ -34,13 +32,17 @@ export const StorageContextProvider = (props) => {
   }
 
   function getTotalPrice(order) {
+    console.log('order', order);
     let totalPrice = 0.0;
     let product = {};
 
-    // TODO - verificar se tem disponível.
     order.forEach((item) => {
       product = allProducts.find((product) => product.id === item.productId);
-      totalPrice = totalPrice + product.price * item.quantity;
+      if (product) {
+        totalPrice = totalPrice + product.price * item.quantity;
+      } else {
+        alert('Esse produto não existe.');
+      }
     });
     totalPrice = parseFloat(totalPrice.toFixed(2));
 

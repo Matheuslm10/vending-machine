@@ -1,8 +1,12 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
+import { CashRegisterContext } from '../../contexts/cashRegisterContext';
 
 import './style.css';
 
-function CoinIn({ totalPrice }) {
+function CoinIn() {
+  const { insertedCoins, setInsertedCoins, calculateValue } = useContext(
+    CashRegisterContext
+  );
   const [coins, setCoins] = useState([0, 0, 0, 0, 0, 0]);
 
   function handleQuantityOfCurrancyChange(event, currencyIndex) {
@@ -19,15 +23,12 @@ function CoinIn({ totalPrice }) {
   }
 
   function handleInsertCoins() {
-    console.log(
-      'atualizar o array de coins inseridas observado pela cashContext'
-    );
+    setInsertedCoins(coins);
   }
 
   return (
     <div className="coin-in">
       <p>CoinIn</p>
-      {totalPrice && <p>Por favor, insira R$ {totalPrice}</p>}
 
       <div className="coins-input-group">
         <div className="coin-input">
@@ -91,9 +92,17 @@ function CoinIn({ totalPrice }) {
         </div>
       </div>
 
-      <button type="button" onClick={() => handleInsertCoins()}>
+      <button
+        className="insert-button"
+        type="button"
+        onClick={() => handleInsertCoins()}
+      >
         Inserir Moedas
       </button>
+
+      <p className="total-inserted">
+        Total Inserido: R$ {calculateValue(insertedCoins).toFixed(2)}
+      </p>
     </div>
   );
 }

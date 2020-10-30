@@ -1,5 +1,4 @@
-import React, { useEffect, useState, useContext } from 'react';
-import { CoreContext } from '../../contexts/coreContext';
+import React, { useContext } from 'react';
 import { StorageContext } from '../../contexts/storageContext';
 
 import './style.css';
