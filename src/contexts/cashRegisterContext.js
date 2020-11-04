@@ -3,9 +3,14 @@ import React, { useState, createContext } from 'react';
 export const CashRegisterContext = createContext();
 
 export const CashRegisterContextProvider = (props) => {
-  const [cash, setCash] = useState([]);
-  const [insertedCoins, setInsertedCoins] = useState([0, 0, 0, 0, 0, 0]);
   const currenciesIndexes = [1, 0.5, 0.25, 0.1, 0.05, 0.01];
+  const [cash, setCash] = useState([50, 50, 50, 30, 20, 20]);
+  const [insertedCoins, setInsertedCoins] = useState([0, 0, 0, 0, 0, 0]);
+  const [purchaseStatus, setPurchaseStatus] = useState({
+    success: false,
+    message: 'No purchase was made yet.',
+    change: insertedCoins
+  });
 
   function calculateValue(coins) {
     let counter = 0;

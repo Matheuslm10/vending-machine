@@ -26,6 +26,11 @@ function CoinIn() {
 
   function handleInsertCoins() {
     setInsertedCoins(coins);
+    clearInputFields();
+  }
+
+  function clearInputFields() {
+    setCoins([0, 0, 0, 0, 0, 0]);
   }
 
   return (
