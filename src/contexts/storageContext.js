@@ -9,6 +9,7 @@ export const StorageContext = createContext();
 export const StorageContextProvider = (props) => {
   const [allProducts, setAllProducts] = useState(products_fixture);
   const [quantities, setQuantities] = useState(quantities_fixture);
+  const [pickupSlotProducts, setPickupSlotProducts] = useState({});
 
   function getProducts(filters) {
     if (filters && filters.price) {
@@ -32,7 +33,6 @@ export const StorageContextProvider = (props) => {
   }
 
   function getTotalPrice(order) {
-    console.log('order', order);
     let totalPrice = 0.0;
     let product = {};
 
@@ -80,11 +80,28 @@ export const StorageContextProvider = (props) => {
 
     if (productIndex === -1) throw Error('The product is not registered.');
 
-    const currentQuantity = quantities[productIndex].quantity;
+    setQuantities(
+      quantities.map((item, index) => {
+        if (index === productIndex) {
+          return { ...item, quantity: item.quantity - decrement };
+        } else {
+          return item;
+        }
+      })
+    );
+  }
 
-    quantities[productIndex] = currentQuantity - decrement;
+  function moveProductsToPickupSlot(productId, quantity) {
+    function getProductNameById() {
+      const isSameId = (product) => product.id === productId;
+      return allProducts.filter(isSameId)[0].name;
+    }
 
-    return quantities[productIndex];
+    setPickupSlotProducts({
+      id: productId,
+      name: getProductNameById(),
+      quantity
+    });
   }
 
   return (
@@ -94,6 +111,8 @@ export const StorageContextProvider = (props) => {
         setAllProducts,
         quantities,
         setQuantities,
+        pickupSlotProducts,
+        moveProductsToPickupSlot,
         getProducts,
         getTotalPrice,
         isAvailable,

@@ -4,7 +4,12 @@ import { StorageContext } from '../../contexts/storageContext';
 import './style.css';
 
 function Showcase() {
-  const { allProducts } = useContext(StorageContext);
+  const { allProducts, quantities } = useContext(StorageContext);
+
+  function getQuantity(product) {
+    const isSameId = (item) => item.productId === product.id;
+    return quantities.filter(isSameId)[0].quantity;
+  }
 
   return (
     <div className="showcase">
@@ -13,9 +18,10 @@ function Showcase() {
           allProducts.map((product) => (
             <li key={product.id} className="item">
               <p>
-                {product.id} - {product.name}
+                ({product.id}) - {product.name}
               </p>
               <p>Preço: R$ {product.price}</p>
+              <p>Qtd. no Estoque: {getQuantity(product)}</p>
             </li>
           ))
         ) : (

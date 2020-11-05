@@ -2,6 +2,7 @@
   border: 2px solid black;
   margin-top: 25px;
   height: 25%;
+  padding: 10px;
 }
 
 .coins-input-group {
@@ -12,7 +13,7 @@
 .coin-input {
   flex: 1;
   text-align: center;
-  margin: 5px 10px 10px;
+  margin-top: 5px;
 }
 
 .coin-input > input {
@@ -20,9 +21,9 @@
 }
 
 .insert-button {
-  margin: 10px;
+  margin-top: 10px;
 }
 
 .total-inserted {
-  margin: 10px;
+  margin-top: 10px;
 }

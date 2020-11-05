@@ -1,11 +1,19 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { StorageContext } from '../../contexts/storageContext';
 
 import './style.css';
 
 function PickupSlot() {
+  const { pickupSlotProducts } = useContext(StorageContext);
+
   return (
     <div className="pickup-slot">
-      <p>PickupSlot</p>
+      <p>Retire seus produtos aqui:</p>
+      {pickupSlotProducts.id && (
+        <p>
+          {pickupSlotProducts.quantity} de {pickupSlotProducts.name}
+        </p>
+      )}
     </div>
   );
 }

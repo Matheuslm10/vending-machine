@@ -35,7 +35,7 @@ function CoinIn() {
 
   return (
     <div className="coin-in">
-      <p>CoinIn</p>
+      <p>Quantas moedas de cada tipo você quer inserir?</p>
 
       <div className="coins-input-group">
         <div className="coin-input">

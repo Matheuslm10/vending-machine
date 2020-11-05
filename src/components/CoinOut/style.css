@@ -2,4 +2,9 @@
   border: 2px solid black;
   margin-top: 25px;
   height: 20%;
+  padding: 10px;
+}
+
+.quantities-list {
+  margin: 5px 20px;
 }

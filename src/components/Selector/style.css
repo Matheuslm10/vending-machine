@@ -1,4 +1,17 @@
 .selector {
   border: 2px solid black;
   height: 30%;
+  padding: 10px;
+}
+
+.inputField {
+  margin-top: 5px;
+}
+
+button {
+  margin-top: 5px;
+}
+
+p {
+  margin-top: 5px;
 }
