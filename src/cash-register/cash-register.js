@@ -57,7 +57,6 @@ function cashRegister(initialCoins, vendingMachineObserver) {
           change: coins,
         };
       case "success_no_change":
-        console.log("valor do caixa depois da compra: ", calculateValue(cash));
         return {
           success: true,
           message: "Purchase successful!",
@@ -70,7 +69,6 @@ function cashRegister(initialCoins, vendingMachineObserver) {
           change: coins,
         };
       case "success":
-        console.log("valor do caixa depois da compra: ", calculateValue(cash));
         return {
           success: true,
           message: "Purchase successful!",

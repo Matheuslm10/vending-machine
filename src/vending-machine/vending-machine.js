@@ -15,7 +15,7 @@ function vendingMachine() {
 
   function notifyObservers(event, payload) {
     for (const observer of state.observers) {
-      console.log(observer.update(event, payload));
+      observer.update(event, payload);
     }
   }
 
