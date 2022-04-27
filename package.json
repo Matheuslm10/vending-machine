@@ -15,8 +15,9 @@
     ]
   },
   "scripts": {
+    "build": "babel src -d lib",
     "test": "jest",
-    "build": "babel src -d lib"
+    "test:open-browser-coverage": "jest && open-cli coverage/index.html"
   },
   "repository": {
     "type": "git",
@@ -34,6 +35,7 @@
   "devDependencies": {
     "@babel/cli": "^7.10.5",
     "@babel/core": "^7.11.4",
-    "@babel/preset-env": "^7.11.0"
+    "@babel/preset-env": "^7.11.0",
+    "open-cli": "^7.0.1"
   }
 }
