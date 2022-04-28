@@ -14,9 +14,9 @@
 
 ## :sparkles: The Project
 
-The Observable design pattern - in front-end development - is very useful, for example, when: changes in the state of a component may require other components to change; the actual set of components is unknown or changes dynamically. That's why frontend frameworks like "React" and "Vue" implement this pattern "under the hood". 
+The Observable design pattern - in front-end development - is very useful, for example, when: changes in the state of a component may require other components to change; the actual set of components is unknown or changes dynamically. These are some of the reasons why frontend frameworks like React.js and Vue.js implement this pattern "under the hood". 
 
-I built this project to put into practice the concepts I learned about this design pattern.
+I built this project to put into practice the concepts I learned about this design pattern. This project doesn't have a user interface.
 
 ### The Pattern Implementation
 
