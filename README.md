@@ -14,7 +14,7 @@
 
 ## :sparkles: The Project
 
-The Observable design pattern - in front-end development - is very useful, for example, when: changes in the state of a component may require other components to change; the actual set of components is unknown or changes dynamically. These are some of the reasons why frontend frameworks like React.js and Vue.js implement this pattern "under the hood". 
+The Observer design pattern - in front-end development - is very useful, for example, when: changes in the state of a component may require other components to change; the actual set of components is unknown or changes dynamically. These are some of the reasons why frontend frameworks like React.js and Vue.js implement this pattern "under the hood". 
 
 I built this project to put into practice the concepts I learned about this design pattern. This project doesn't have a user interface.
 
@@ -23,13 +23,13 @@ I built this project to put into practice the concepts I learned about this desi
 The Vending Machine module act as the Subject and notifies all the Observers (Cash Register and Storage modules):
 
 <p align="center">
-  <img alt="Concept Diagram that illustrates the Observable design pattern implementation" src="https://user-images.githubusercontent.com/17602947/165660926-3bbc56fa-07a5-49e4-a1e0-b0cada66da9f.svg"> 
+  <img alt="Concept Diagram that illustrates the Observer design pattern implementation" src="https://user-images.githubusercontent.com/17602947/165660926-3bbc56fa-07a5-49e4-a1e0-b0cada66da9f.svg"> 
 </p>
 
 The sequence diagram below is intended only to help understand a basic flow of actions. (This diagram does not follow UML standards, so it doesn't exactly represent the application's behavior)
 
 <p align="center">
-  <img alt="Sequence Diagram that illustrates the Observable design pattern implementation" src="https://user-images.githubusercontent.com/17602947/165662132-a6e51878-13dd-4e01-91ae-2c4e750f159b.svg"> 
+  <img alt="Sequence Diagram that illustrates the Observer design pattern implementation" src="https://user-images.githubusercontent.com/17602947/165662132-a6e51878-13dd-4e01-91ae-2c4e750f159b.svg"> 
 </p>
 
 ## :computer: How to run
