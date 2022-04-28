@@ -20,7 +20,7 @@ I built this project to put into practice the concepts I learned about this desi
 
 ### The Pattern Implementation
 
-The Vending Machine module act as the Subject and notifies all the Observers (Cash Register and Storage modules):
+The Vending Machine module acts as the Subject and notifies all the Observers (Cash Register and Storage modules):
 
 <p align="center">
   <img alt="Concept Diagram that illustrates the Observer design pattern implementation" src="https://user-images.githubusercontent.com/17602947/165660926-3bbc56fa-07a5-49e4-a1e0-b0cada66da9f.svg"> 
